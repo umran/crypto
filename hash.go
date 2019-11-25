@@ -10,7 +10,7 @@ import (
 // Hash ...
 type Hash []byte
 
-func doubleShaSum256(data []byte) []byte {
+func doubleShaSum256(data []byte) Hash {
 	firstSum := sha256.Sum256(data)
 	secondSum := sha256.Sum256(firstSum[:])
 
@@ -20,24 +20,19 @@ func doubleShaSum256(data []byte) []byte {
 // Merge ...
 func (primary Hash) Merge(secondary Hash) Hash {
 	mergedBytes := make([]byte, 64)
-
 	offset := 0
 
 	for _, octet := range primary {
 		mergedBytes[offset] = octet
-
 		offset++
 	}
 
 	for _, octet := range secondary {
 		mergedBytes[offset] = octet
-
 		offset++
 	}
 
-	var hash Hash = doubleShaSum256(mergedBytes)
-
-	return hash
+	return doubleShaSum256(mergedBytes)
 }
 
 // Equal ...
@@ -58,9 +53,7 @@ func HashFromHexString(s string) Hash {
 
 // GenerateHash ...
 func GenerateHash(data []byte) Hash {
-	var hash Hash = doubleShaSum256(data)
-
-	return hash
+	return doubleShaSum256(data)
 }
 
 // GenerateHashFromStream ...
