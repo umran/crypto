@@ -2,11 +2,23 @@ package crypto
 
 import (
 	"crypto/ed25519"
+	"encoding/base64"
 	"encoding/hex"
 )
 
 // Signature ...
 type Signature []byte
+
+// B64String ...
+func (sig Signature) B64String() string {
+	return base64.StdEncoding.EncodeToString(sig)
+}
+
+// SignatureFromB64String ...
+func SignatureFromB64String(s string) Hash {
+	decoded, _ := base64.StdEncoding.DecodeString(s)
+	return decoded
+}
 
 // HexString ...
 func (sig Signature) HexString() string {

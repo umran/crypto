@@ -2,6 +2,7 @@ package crypto
 
 import (
 	"crypto/rand"
+	"encoding/base64"
 	"encoding/hex"
 )
 
@@ -12,6 +13,17 @@ const (
 
 // Nonce ...
 type Nonce []byte
+
+// B64String ...
+func (nonce Nonce) B64String() string {
+	return base64.StdEncoding.EncodeToString(nonce)
+}
+
+// NonceFromB64String ...
+func NonceFromB64String(s string) Nonce {
+	decoded, _ := base64.StdEncoding.DecodeString(s)
+	return decoded
+}
 
 // HexString ...
 func (nonce Nonce) HexString() string {

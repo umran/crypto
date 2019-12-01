@@ -3,6 +3,7 @@ package crypto
 import (
 	"bytes"
 	"crypto/sha256"
+	"encoding/base64"
 	"encoding/hex"
 	"io"
 )
@@ -38,6 +39,17 @@ func (primary Hash) Merge(secondary Hash) Hash {
 // Equal ...
 func (primary Hash) Equal(secondary Hash) bool {
 	return bytes.Equal(primary, secondary)
+}
+
+// B64String ...
+func (primary Hash) B64String() string {
+	return base64.StdEncoding.EncodeToString(primary)
+}
+
+// HashFromB64String ...
+func HashFromB64String(s string) Hash {
+	decoded, _ := base64.StdEncoding.DecodeString(s)
+	return decoded
 }
 
 // HexString ...
