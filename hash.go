@@ -69,10 +69,13 @@ func GenerateHash(data []byte) Hash {
 }
 
 // GenerateHashFromStream ...
-func GenerateHashFromStream(r io.Reader) Hash {
+func GenerateHashFromStream(r io.Reader) (Hash, error) {
 	hash := sha256.New()
-	io.Copy(hash, r)
+	_, err := io.Copy(hash, r)
+	if err != nil {
+		return nil, err
+	}
 
 	doubleHash := sha256.Sum256(hash.Sum(nil))
-	return doubleHash[:]
+	return doubleHash[:], nil
 }
