@@ -9,6 +9,11 @@ import (
 // Signature ...
 type Signature []byte
 
+// Serialize ...
+func (sig Signature) Serialize() []byte {
+	return []byte(sig)
+}
+
 // B64String ...
 func (sig Signature) B64String() string {
 	return base64.StdEncoding.EncodeToString(sig)

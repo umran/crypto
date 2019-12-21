@@ -12,6 +12,16 @@ type PrivKey []byte
 // PubKey ...
 type PubKey []byte
 
+// Serialize ...
+func (privKey PrivKey) Serialize() []byte {
+	return []byte(privKey)
+}
+
+// Serialize ...
+func (pubKey PubKey) Serialize() []byte {
+	return []byte(pubKey)
+}
+
 // B64String ...
 func (privKey PrivKey) B64String() string {
 	return base64.StdEncoding.EncodeToString(privKey)

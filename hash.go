@@ -11,6 +11,11 @@ import (
 // Hash ...
 type Hash []byte
 
+// Serialize ...
+func (primary Hash) Serialize() []byte {
+	return []byte(primary)
+}
+
 func doubleShaSum256(data []byte) Hash {
 	firstSum := sha256.Sum256(data)
 	secondSum := sha256.Sum256(firstSum[:])

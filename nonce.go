@@ -14,6 +14,11 @@ const (
 // Nonce ...
 type Nonce []byte
 
+// Serialize ...
+func (nonce Nonce) Serialize() []byte {
+	return []byte(nonce)
+}
+
 // B64String ...
 func (nonce Nonce) B64String() string {
 	return base64.StdEncoding.EncodeToString(nonce)
