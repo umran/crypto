@@ -1,6 +1,7 @@
 package crypto
 
 import (
+	"bytes"
 	"crypto/ed25519"
 	"encoding/base64"
 	"encoding/hex"
@@ -11,6 +12,11 @@ type PrivKey []byte
 
 // PubKey ...
 type PubKey []byte
+
+// Equal is a method that only PubKey needs
+func (pubKey PubKey) Equal(secondary PubKey) bool {
+	return bytes.Equal(pubKey, secondary)
+}
 
 // Serialize ...
 func (privKey PrivKey) Serialize() []byte {
