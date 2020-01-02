@@ -20,9 +20,13 @@ func (sig Signature) B64String() string {
 }
 
 // SignatureFromB64String ...
-func SignatureFromB64String(s string) Hash {
-	decoded, _ := base64.StdEncoding.DecodeString(s)
-	return decoded
+func SignatureFromB64String(s string) (Signature, error) {
+	decoded, err := base64.StdEncoding.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // HexString ...
@@ -31,9 +35,13 @@ func (sig Signature) HexString() string {
 }
 
 // SignatureFromHexString ...
-func SignatureFromHexString(s string) Signature {
-	decoded, _ := hex.DecodeString(s)
-	return decoded
+func SignatureFromHexString(s string) (Signature, error) {
+	decoded, err := hex.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // Sign ...
