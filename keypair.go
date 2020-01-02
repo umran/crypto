@@ -28,9 +28,13 @@ func (privKey PrivKey) B64String() string {
 }
 
 // PrivKeyFromB64String ...
-func PrivKeyFromB64String(s string) PrivKey {
-	decoded, _ := base64.StdEncoding.DecodeString(s)
-	return decoded
+func PrivKeyFromB64String(s string) (PrivKey, error) {
+	decoded, err := base64.StdEncoding.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // B64String ...
@@ -39,9 +43,13 @@ func (pubKey PubKey) B64String() string {
 }
 
 // PubKeyFromB64String ...
-func PubKeyFromB64String(s string) PubKey {
-	decoded, _ := base64.StdEncoding.DecodeString(s)
-	return decoded
+func PubKeyFromB64String(s string) (PubKey, error) {
+	decoded, err := base64.StdEncoding.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // HexString ...
@@ -50,9 +58,13 @@ func (privKey PrivKey) HexString() string {
 }
 
 // PrivKeyFromHexString ...
-func PrivKeyFromHexString(s string) PrivKey {
-	decoded, _ := hex.DecodeString(s)
-	return decoded
+func PrivKeyFromHexString(s string) (PrivKey, error) {
+	decoded, err := hex.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // HexString ...
@@ -61,9 +73,13 @@ func (pubKey PubKey) HexString() string {
 }
 
 // PubKeyFromHexString ...
-func PubKeyFromHexString(s string) PubKey {
-	decoded, _ := hex.DecodeString(s)
-	return decoded
+func PubKeyFromHexString(s string) (PubKey, error) {
+	decoded, err := hex.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // KeyPair ...
