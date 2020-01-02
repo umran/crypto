@@ -52,9 +52,13 @@ func (primary Hash) B64String() string {
 }
 
 // HashFromB64String ...
-func HashFromB64String(s string) Hash {
-	decoded, _ := base64.StdEncoding.DecodeString(s)
-	return decoded
+func HashFromB64String(s string) (Hash, error) {
+	decoded, err := base64.StdEncoding.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // HexString ...
@@ -63,9 +67,13 @@ func (primary Hash) HexString() string {
 }
 
 // HashFromHexString ...
-func HashFromHexString(s string) Hash {
-	decoded, _ := hex.DecodeString(s)
-	return decoded
+func HashFromHexString(s string) (Hash, error) {
+	decoded, err := hex.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // GenerateHash ...
