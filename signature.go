@@ -4,10 +4,23 @@ import (
 	"crypto/ed25519"
 	"encoding/base64"
 	"encoding/hex"
+	"fmt"
 )
+
+// SignatureSize ...
+const SignatureSize = 64
 
 // Signature ...
 type Signature []byte
+
+// Validate ...
+func (sig Signature) Validate() error {
+	if len(sig) != SignatureSize {
+		return fmt.Errorf("must be exactly %d bytes", SignatureSize)
+	}
+
+	return nil
+}
 
 // Serialize ...
 func (sig Signature) Serialize() []byte {

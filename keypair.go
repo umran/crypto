@@ -4,6 +4,14 @@ import (
 	"crypto/ed25519"
 	"encoding/base64"
 	"encoding/hex"
+	"fmt"
+)
+
+const (
+	// PrivKeySize ...
+	PrivKeySize = 64
+	// PubKeySize ...
+	PubKeySize = 32
 )
 
 // PrivKey ...
@@ -11,6 +19,24 @@ type PrivKey []byte
 
 // PubKey ...
 type PubKey []byte
+
+// Validate ...
+func (privKey PrivKey) Validate() error {
+	if len(privKey) != PrivKeySize {
+		return fmt.Errorf("must be exactly %d bytes", PrivKeySize)
+	}
+
+	return nil
+}
+
+// Validate ...
+func (pubKey PubKey) Validate() error {
+	if len(pubKey) != PubKeySize {
+		return fmt.Errorf("must be exactly %d bytes", PubKeySize)
+	}
+
+	return nil
+}
 
 // Serialize ...
 func (privKey PrivKey) Serialize() []byte {

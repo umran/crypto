@@ -4,15 +4,23 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"encoding/hex"
+	"fmt"
 )
 
-const (
-	// NonceSize ...
-	NonceSize int = 32
-)
+// NonceSize ...
+const NonceSize int = 32
 
 // Nonce ...
 type Nonce []byte
+
+// Validate ...
+func (nonce Nonce) Validate() error {
+	if len(nonce) != NonceSize {
+		return fmt.Errorf("must be exactly %d bytes", NonceSize)
+	}
+
+	return nil
+}
 
 // Serialize ...
 func (nonce Nonce) Serialize() []byte {

@@ -5,11 +5,24 @@ import (
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/hex"
+	"fmt"
 	"io"
 )
 
+// HashSize ...
+const HashSize = 32
+
 // Hash ...
 type Hash []byte
+
+// Validate ...
+func (primary Hash) Validate() error {
+	if len(primary) != HashSize {
+		return fmt.Errorf("must be exactly %d bytes", HashSize)
+	}
+
+	return nil
+}
 
 // Serialize ...
 func (primary Hash) Serialize() []byte {
