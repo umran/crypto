@@ -60,6 +60,10 @@ func PrivKeyFromB64String(s string) (PrivKey, error) {
 		return nil, err
 	}
 
+	if err = PrivKey(decoded).Validate(); err != nil {
+		return nil, err
+	}
+
 	return decoded, nil
 }
 
@@ -72,6 +76,10 @@ func (pubKey PubKey) B64String() string {
 func PubKeyFromB64String(s string) (PubKey, error) {
 	decoded, err := base64.StdEncoding.DecodeString(s)
 	if err != nil {
+		return nil, err
+	}
+
+	if err = PubKey(decoded).Validate(); err != nil {
 		return nil, err
 	}
 
@@ -90,6 +98,10 @@ func PrivKeyFromHexString(s string) (PrivKey, error) {
 		return nil, err
 	}
 
+	if err = PrivKey(decoded).Validate(); err != nil {
+		return nil, err
+	}
+
 	return decoded, nil
 }
 
@@ -102,6 +114,10 @@ func (pubKey PubKey) HexString() string {
 func PubKeyFromHexString(s string) (PubKey, error) {
 	decoded, err := hex.DecodeString(s)
 	if err != nil {
+		return nil, err
+	}
+
+	if err = PubKey(decoded).Validate(); err != nil {
 		return nil, err
 	}
 

@@ -39,6 +39,10 @@ func SignatureFromB64String(s string) (Signature, error) {
 		return nil, err
 	}
 
+	if err = Signature(decoded).Validate(); err != nil {
+		return nil, err
+	}
+
 	return decoded, nil
 }
 
@@ -51,6 +55,10 @@ func (sig Signature) HexString() string {
 func SignatureFromHexString(s string) (Signature, error) {
 	decoded, err := hex.DecodeString(s)
 	if err != nil {
+		return nil, err
+	}
+
+	if err = Signature(decoded).Validate(); err != nil {
 		return nil, err
 	}
 

@@ -71,6 +71,10 @@ func HashFromB64String(s string) (Hash, error) {
 		return nil, err
 	}
 
+	if err = Hash(decoded).Validate(); err != nil {
+		return nil, err
+	}
+
 	return decoded, nil
 }
 
@@ -83,6 +87,10 @@ func (primary Hash) HexString() string {
 func HashFromHexString(s string) (Hash, error) {
 	decoded, err := hex.DecodeString(s)
 	if err != nil {
+		return nil, err
+	}
+
+	if err = Hash(decoded).Validate(); err != nil {
 		return nil, err
 	}
 

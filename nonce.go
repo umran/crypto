@@ -33,9 +33,17 @@ func (nonce Nonce) B64String() string {
 }
 
 // NonceFromB64String ...
-func NonceFromB64String(s string) Nonce {
-	decoded, _ := base64.StdEncoding.DecodeString(s)
-	return decoded
+func NonceFromB64String(s string) (Nonce, error) {
+	decoded, err := base64.StdEncoding.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	if err = Nonce(decoded).Validate(); err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // HexString ...
@@ -44,9 +52,17 @@ func (nonce Nonce) HexString() string {
 }
 
 // NonceFromHexString ...
-func NonceFromHexString(s string) Nonce {
-	decoded, _ := hex.DecodeString(s)
-	return decoded
+func NonceFromHexString(s string) (Nonce, error) {
+	decoded, err := hex.DecodeString(s)
+	if err != nil {
+		return nil, err
+	}
+
+	if err = Nonce(decoded).Validate(); err != nil {
+		return nil, err
+	}
+
+	return decoded, nil
 }
 
 // GenerateNonce ...
