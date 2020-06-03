@@ -1,6 +1,7 @@
 package crypto
 
 import (
+	"bytes"
 	"crypto/ed25519"
 	"encoding/base64"
 	"encoding/hex"
@@ -20,6 +21,11 @@ func (sig Signature) Validate() error {
 	}
 
 	return nil
+}
+
+// Equal ...
+func (sig Signature) Equal(secondary Signature) bool {
+	return bytes.Equal(sig, secondary)
 }
 
 // Serialize ...

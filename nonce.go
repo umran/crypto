@@ -1,6 +1,7 @@
 package crypto
 
 import (
+	"bytes"
 	"crypto/rand"
 	"encoding/base64"
 	"encoding/hex"
@@ -20,6 +21,11 @@ func (nonce Nonce) Validate() error {
 	}
 
 	return nil
+}
+
+// Equal ...
+func (nonce Nonce) Equal(secondary Nonce) bool {
+	return bytes.Equal(nonce, secondary)
 }
 
 // Serialize ...

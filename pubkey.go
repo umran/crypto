@@ -1,6 +1,7 @@
 package crypto
 
 import (
+	"bytes"
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
@@ -19,6 +20,11 @@ func (pubKey PubKey) Validate() error {
 	}
 
 	return nil
+}
+
+// Equal ...
+func (pubKey PubKey) Equal(secondary PubKey) bool {
+	return bytes.Equal(pubKey, secondary)
 }
 
 // Serialize ...

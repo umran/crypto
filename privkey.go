@@ -1,6 +1,7 @@
 package crypto
 
 import (
+	"bytes"
 	"encoding/base64"
 	"encoding/hex"
 	"fmt"
@@ -19,6 +20,11 @@ func (privKey PrivKey) Validate() error {
 	}
 
 	return nil
+}
+
+// Equal ...
+func (privKey PrivKey) Equal(secondary PrivKey) bool {
+	return bytes.Equal(privKey, secondary)
 }
 
 // Serialize ...
